@@ -21,22 +21,30 @@ const Tabs = (topics) => {
   const javascriptTab = document.createElement("div");
   const bootstrapTab = document.createElement("div");
   const technologyTab = document.createElement("div");
+  const jqueryTab = document.createElement("div");
+  const nodeJSTab = document.createElement("div");
 
   //setting structure 
   topicsTab.appendChild(javascriptTab);
   topicsTab.appendChild(bootstrapTab);
   topicsTab.appendChild(technologyTab);
+  topicsTab.appendChild(jqueryTab);
+  topicsTab.appendChild(nodeJSTab);
 
   //setting classes
   topicsTab.classList.add("topics");
   javascriptTab.classList.add("tab");
   bootstrapTab.classList.add("tab");
   technologyTab.classList.add("tab");
+  jqueryTab.classList.add("tab");
+  nodeJSTab.classList.add("tab");
 
   //setting text content 
   javascriptTab.textContent = topics[0];
   bootstrapTab.textContent = topics[1];
   technologyTab.textContent = topics[2];
+  jqueryTab.textContent = topics[3];
+  nodeJSTab.textContent = topics[4];
 
   return topicsTab;
 
@@ -54,9 +62,10 @@ const tabsAppender = (selector) => {
   const entryPoint = document.querySelector(selector);
   axios.get("http://localhost:5000/api/topics")
   .then(res => {
+    console.log(res.data.topics);
     const newTopics = Tabs(res.data.topics);
     entryPoint.appendChild(newTopics);
-  })
+    })
   .catch(err => {
     console.error(err);
   })
