@@ -34,9 +34,9 @@ const Tabs = (topics) => {
   technologyTab.classList.add("tab");
 
   //setting text content 
-  javascriptTab.textContent = "javascript";
-  bootstrapTab.textContent = "bootstrap";
-  technologyTab.textContent = "technology";
+  javascriptTab.textContent = topics[0];
+  bootstrapTab.textContent = topics[1];
+  technologyTab.textContent = topics[2];
 
   return topicsTab;
 
@@ -54,22 +54,14 @@ const tabsAppender = (selector) => {
   const entryPoint = document.querySelector(selector);
   axios.get("http://localhost:5000/api/topics")
   .then(res => {
-    console.log(res.data);
+    const newTopics = Tabs(res.data.topics);
+    entryPoint.appendChild(newTopics);
   })
   .catch(err => {
     console.error(err);
   })
 }
 
-axios.get("http://localhost:5000/api/topics")
-.then(res => {
-  console.log(res.data);
-})
-.catch(err => {
-  console.error(err);
-})
-
-console.log("test");
 
 export { Tabs, tabsAppender }
 
